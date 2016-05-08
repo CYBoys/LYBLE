@@ -130,7 +130,7 @@ CBPeripheralDelegate
         if (characteristic.properties & CBCharacteristicPropertyWrite) {
             if ([characteristic.UUID.UUIDString isEqualToString:self.writeUUID]) {
                 //[@"hello,外设" dataUsingEncoding:NSUTF8StringEncoding]
-                [peripheral writeValue:self.writeData forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+                [peripheral writeValue:[@"hello,外设" dataUsingEncoding:NSUTF8StringEncoding] forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
                 self.currentCharacter = characteristic;
                 NSLog(@"写数据给外设");
                 
@@ -149,6 +149,7 @@ CBPeripheralDelegate
 //* 停止扫描 */
 - (void)stopScan {
     [self.centralManager stopScan];
+    [self.peripherals removeAllObjects];
 }
 //* 连接外围设备 */
 - (void)connectPeripheral:(CBPeripheral *)peripheral {
@@ -158,7 +159,7 @@ CBPeripheralDelegate
 
 - (void)writeDataInPerpheral:(NSData *)data {
     if (self.connectPeripheral != nil && self.currentCharacter != nil) {
-        [self.connectPeripheral writeValue:self.writeData forCharacteristic:self.currentCharacter type:CBCharacteristicWriteWithResponse];
+        [self.connectPeripheral writeValue:data forCharacteristic:self.currentCharacter type:CBCharacteristicWriteWithResponse];
         NSLog(@"写数据给外设");
     }
 
