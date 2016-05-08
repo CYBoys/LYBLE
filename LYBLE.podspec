@@ -7,6 +7,6 @@ Pod::Spec.new do |s|
   s.authors      = { 'tangjr' => '15923456720@163.com'}
   s.platform     = :ios, "7.0"
   s.source       = { :git => "https://github.com/CYBoys/LYBLE.git", :tag => s.version }
-  s.source_files = 'LYBLE', 'LYBLE/**/*.{h,m}'
+  s.source_files  = 'LYBLE/*.{h,m}'.source_files  = 'LYBLE/*.{h,m}'
   s.requires_arc = true
 end
